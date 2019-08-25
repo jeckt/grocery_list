@@ -2,8 +2,11 @@
 
 class GroceryList:
 
-    def __init__(self):
+    def __init__(self, file=None):
         self.items = []
+        if file:
+            with open(file, 'r') as f:
+                _ = [self.add(line.rstrip()) for line in f.readlines()]
 
     def add(self, item):
         self.items.append(item)

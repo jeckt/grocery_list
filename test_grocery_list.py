@@ -41,7 +41,7 @@ class GroceryListFromFileTest(unittest.TestCase):
     def test_can_view_a_grocery_list(self):
         groceries = GroceryList(file='test_data.txt')
 
-        results = self.groceries.view()
+        results = groceries.view()
 
         expected_results = ('Flank steak', 'Potatoes', 'Eggs')
         self.assertEqual(expected_results, results)

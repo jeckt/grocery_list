@@ -26,5 +26,26 @@ class GroceryListTest(unittest.TestCase):
 
         self.assertTrue('Flank steak' in self.groceries.items)
 
+class GroceryListFromFileTest(unittest.TestCase):
+
+    def setUp(self):
+        with open('test_data.txt', 'w') as f:
+            f.write('Flank steak\n')
+            f.write('Potatoes\n')
+            f.write('Eggs\n')
+
+    def tearDown(self):
+        import os
+        os.remove('test_data.txt')
+
+    def test_can_view_a_grocery_list(self):
+        groceries = GroceryList(file='test_data.txt')
+
+        results = self.groceries.view()
+
+        expected_results = ('Flank steak', 'Potatoes', 'Eggs')
+        self.assertEqual(expected_results, results)
+
+
 if __name__ == '__main__':
     unittest.main()

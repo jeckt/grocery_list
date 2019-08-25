@@ -28,13 +28,15 @@ class GroceryListTest(unittest.TestCase):
 
 class GroceryListFromFileTest(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         with open('test_data.txt', 'w') as f:
             f.write('Flank steak\n')
             f.write('Potatoes\n')
             f.write('Eggs\n')
 
-    def tearDown(self):
+    @classmethod
+    def tearDownClass(cls):
         import os
         os.remove('test_data.txt')
 
@@ -46,6 +48,19 @@ class GroceryListFromFileTest(unittest.TestCase):
         expected_results = ('Flank steak', 'Potatoes', 'Eggs')
         self.assertEqual(expected_results, results)
 
+    def test_can_add_to_existing_grocery_list(self):
+        groceries = GroceryList(file='test_data.txt')
+
+        results = groceries.view()
+
+        expected_results = ('Flank steak', 'Potatoes', 'Eggs')
+        self.assertEqual(expected_results, results)
+
+        groceries.add('Scallions')
+        results = groceries.view()
+
+        expected_results = ('Flank steak', 'Potatoes', 'Eggs', 'Scallions')
+        self.assertEqual(expected_results, results)
 
 if __name__ == '__main__':
     unittest.main()

@@ -12,4 +12,4 @@ class GroceryList:
         self.items.append(item)
 
     def view(self):
-        return tuple(self.items)
+        _ = [print(item) for item in self.items]
